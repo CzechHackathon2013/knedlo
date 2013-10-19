@@ -1,3 +1,5 @@
+*.zip
+
 # SBT
 dist/*
 boot/

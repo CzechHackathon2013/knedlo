@@ -6,12 +6,13 @@ import cz.czechhackathon.knedlo.model.{Badge, Article}
 import com.google.appengine.api.users.User
 import javax.inject.Named
 import javax.annotation.Nullable
+import cz.czechhackathon.knedlo.util.Logging
 
 @Api(name = "knedlo", version = "v1", clientIds = Array(
   "338711060290.apps.googleusercontent.com", // iOS
   "338711060290-5hmko3leeamlt9us7vcpdg7l2a5q163n.apps.googleusercontent.com" // Android
 ))
-class Endpoint {
+class Endpoint extends Logging {
 
   /**
    * Get paged article feed for the given user
@@ -21,7 +22,9 @@ class Endpoint {
    */
   @ApiMethod(name = "feed", path = "feed", httpMethod = HttpMethod.GET)
   def feed(@Named("page") @Nullable page: Integer, user: User):Array[Article] = {
-    
+    if (user != null) {
+      log.info(s"${user.toString} - email: ${user.getEmail}")
+    }
     Array(new Article("foo", "http://foo"))
   }
 
