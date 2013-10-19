@@ -7,7 +7,7 @@ class Article(@BeanProperty val title: String,
               @BeanProperty val description: String = null,
               @BeanProperty val source: String = null,
               @BeanProperty val image: String = null,
-              @BeanProperty val category: String = null
+              @BeanProperty val category: String
              ) {
 
   override def toString: String = s"$title $link"

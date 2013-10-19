@@ -26,7 +26,7 @@ class Endpoint extends Logging {
       log.info(s"${user.toString} - email: ${user.getEmail}")
     }
 
-    Array(new Article("foo", "http://foo"))
+    Array(new Article("foo", "http://foo", category = "cat"))
   }
 
   /**

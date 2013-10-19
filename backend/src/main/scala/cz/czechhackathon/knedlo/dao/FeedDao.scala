@@ -17,7 +17,7 @@ class FeedDao {
   def store(article: Article, userId: String) {
     Datastore.put(
       new Feed(userId, article.title, article.link, Option(new Text(article.description)), Option(article.source),
-        Option(article.image), Option(article.category), new Date(), 0))
+        Option(article.image), article.category, new Date(), 0))
   }
 
   /**
@@ -35,8 +35,7 @@ class FeedDao {
           case Some(d) => d.toString
           case None => null
         }
-        new Article(f.title, f.link, desc, f.source.getOrElse(null), f.image.getOrElse(null),
-          f.category.getOrElse(null))
+        new Article(f.title, f.link, desc, f.source.getOrElse(null), f.image.getOrElse(null), f.category)
     }.toArray
   }
 }

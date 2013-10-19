@@ -10,12 +10,12 @@ class Feed(val userId: Property[String],
            val description: Property[Option[Text]],
            val source: Property[Option[String]],
            val image: Property[Option[String]],
-           val category: Property[Option[String]],
+           val category: Property[String],
            val insertDate: Property[Date],
            val status: Property[Long])
   extends Mapper[Feed] {
 
-  def this() = this("", "", "", None, None, None, None, new Date(), 0)
+  def this() = this("", "", "", None, None, None, "", new Date(), 0)
 
 }
 
