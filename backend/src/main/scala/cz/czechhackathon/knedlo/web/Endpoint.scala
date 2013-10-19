@@ -53,9 +53,11 @@ class Endpoint extends Logging {
    * @return list of newly awarded badges or empty list
    */
   @ApiMethod(name = "action", path = "action", httpMethod = HttpMethod.POST)
-  def action(@Named("action") action: String, @Named("articleLink") articleLink: String, user: User): Array[Badge] = {
-    //TODO
-    Array(new Badge("Stará bačkora", "Přečetl jsi recenze 10 černobílých filmů", "http://www.nadmerneboty.cz/fotky4936/fotos/_vyr_266BP0773.jpg"))
+  def action(@Named("action") action: String, @Named("articleLink") articleLink: String, user: User):Array[Badge] = {
+    if (user != null) {
+      feedService.action(action, articleLink, user.getEmail)
+    } else {
+      Array(new Badge("Stará bačkora", "Přečetl jsi recenze 10 černobílých filmů", "http://www.nadmerneboty.cz/fotky4936/fotos/_vyr_266BP0773.jpg"))
   }
 
   /**

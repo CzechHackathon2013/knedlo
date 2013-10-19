@@ -38,4 +38,22 @@ class FeedDao {
         new Article(f.title, f.link, desc, f.source.getOrElse(null), f.image.getOrElse(null), f.category)
     }.toArray
   }
+
+  /**
+   * Update status for the given link and user
+   * @param link link of the article
+   * @param email user's email
+   * @param status status
+   * @return updated entity
+   * @throws IllegalStateException if no combination of link and user matches
+   */
+  def update(link: String, email: String, status: Long): Feed = {
+    val feed = Feed.query().filter(f => (f.link #== link) and (f.userEmail #== email)).asSingle()
+    if (feed == null) {
+      throw new IllegalStateException(s"No record found for link $link and user $email")
+    }
+    feed.status = status
+    feed.put()
+    feed
+  }
 }
