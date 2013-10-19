@@ -4,9 +4,9 @@ import scala.beans.BeanProperty
 
 class Article(@BeanProperty val title: String,
               @BeanProperty val link: String,
-              @BeanProperty val description: String = _,
-              @BeanProperty val source: String = _,
-              @BeanProperty val image: String = _,
-              @BeanProperty val category: String =_
+              @BeanProperty val description: String = null,
+              @BeanProperty val source: String = null,
+              @BeanProperty val image: String = null,
+              @BeanProperty val category: String = null
              ) {
 }
