@@ -21,6 +21,15 @@
         <url-pattern>/download</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ArticleServlet</servlet-name>
+        <servlet-class>cz.czechhackathon.knedlo.web.ArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ArticleServlet</servlet-name>
+        <url-pattern>/article</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
