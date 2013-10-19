@@ -1,0 +1,6 @@
+<queue-entries>
+    <queue>
+        <name>articles</name>
+        <rate>10/m</rate>
+    </queue>
+</queue-entries>
