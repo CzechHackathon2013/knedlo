@@ -12,22 +12,22 @@ class FeedDao {
   /**
    * Store article to feed of given user.
    * @param article article to be stored
-   * @param userId user identifier
+   * @param userEmail user email
    */
-  def store(article: Article, userId: String) {
+  def store(article: Article, userEmail: String) {
     Datastore.put(
-      new Feed(userId, article.title, article.link, Option(new Text(article.description)), Option(article.source),
+      new Feed(userEmail, article.title, article.link, Option(new Text(article.description)), Option(article.source),
         Option(article.image), article.category, new Date(), 0))
   }
 
   /**
-   * Get unread articles by user identifier in a descending order by insertDate.
-   * @param userId user identifier
+   * Get unread articles by user email in a descending order by insertDate.
+   * @param userEmail user email
    * @return array of articles
    */
-  def get(userId: String): Array[Article] = {
+  def get(userEmail: String): Array[Article] = {
     Feed.query
-      .filter(_.userId #== userId)
+      .filter(_.userEmail #== userEmail)
       .sort(_.insertDate desc)
       .asIterator().map {
       f =>

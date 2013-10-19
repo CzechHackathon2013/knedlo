@@ -12,4 +12,8 @@ class FeedService(val userDao: UserDao = new UserDao,
     )
   }
 
+  def get(userEmail: String): Array[Article] = {
+    feedDao.get(userEmail)
+  }
+
 }

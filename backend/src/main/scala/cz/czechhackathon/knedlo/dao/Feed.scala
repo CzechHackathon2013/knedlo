@@ -4,7 +4,7 @@ import com.github.hexx.gaeds.{Mapper, Property}
 import java.util.Date
 import com.google.appengine.api.datastore.Text
 
-class Feed(val userId: Property[String],
+class Feed(val userEmail: Property[String],
            val title: Property[String],
            val link: Property[String],
            val description: Property[Option[Text]],
