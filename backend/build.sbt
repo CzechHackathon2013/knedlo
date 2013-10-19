@@ -14,6 +14,7 @@ libraryDependencies ++= Seq (
   "javax.servlet" % "servlet-api" % "2.5" % "provided",
   "javax.inject" % "javax.inject" % "1", // todo needed?
   "org.scalatest" % "scalatest_2.10" % "1.9.1" % "test",
+  "org.mockito" % "mockito-core" % "1.9.5" % "test",
   "org.mortbay.jetty" % "jetty" % "6.1.22" % "container",
   "com.twitter" % "util-logging_2.10" % "6.6.0"
 )
