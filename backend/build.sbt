@@ -8,6 +8,7 @@ resolvers += "Typesafe Repository" at "http://repo.typesafe.com/typesafe/release
 
 
 libraryDependencies ++= Seq (
+  "com.github.hexx" % "gaeds_2.9.2" % "0.2.0",
   "com.google.appengine" % "appengine-api-1.0-sdk" % "1.8.6",
   "com.google.appengine" % "appengine-endpoints" % "1.8.6",
   "javax.servlet" % "servlet-api" % "2.5" % "provided",
