@@ -7,7 +7,7 @@ Package
 
 Generate client
 -------
-`endpoints.sh get-client-lib --war=target/webapp cz.czechhackathon.knedlo.web.Endpoind`
+`endpoints.sh get-client-lib --war=target/webapp cz.czechhackathon.knedlo.web.Endpoint`
 
 Run
 -------

@@ -11,7 +11,7 @@ import javax.annotation.Nullable
   "338711060290.apps.googleusercontent.com", // iOS
   "338711060290-5hmko3leeamlt9us7vcpdg7l2a5q163n.apps.googleusercontent.com" // Android
 ))
-class Endpoind {
+class Endpoint {
 
   /**
    * Get paged article feed for the given user
@@ -21,6 +21,7 @@ class Endpoind {
    */
   @ApiMethod(name = "feed", path = "feed", httpMethod = HttpMethod.GET)
   def feed(@Named("page") @Nullable page: Integer, user: User):Array[Article] = {
+    
     Array(new Article("foo", "http://foo"))
   }
 

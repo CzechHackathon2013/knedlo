@@ -4,7 +4,7 @@
         <servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
         <init-param>
             <param-name>services</param-name>
-            <param-value>cz.czechhackathon.knedlo.web.Endpoind</param-value>
+            <param-value>cz.czechhackathon.knedlo.web.Endpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
