@@ -8,6 +8,7 @@ import javax.inject.Named
 import javax.annotation.Nullable
 import cz.czechhackathon.knedlo.util.Logging
 import cz.czechhackathon.knedlo.service.FeedService
+import cz.czechhackathon.knedlo.dao.CategoryDao
 
 @Api(name = "knedlo", version = "v1", clientIds = Array(
   "338711060290.apps.googleusercontent.com", // iOS
@@ -15,7 +16,8 @@ import cz.czechhackathon.knedlo.service.FeedService
 ))
 class Endpoint extends Logging {
 
-  val feedService = new FeedService()
+  val feedService = new FeedService
+  val categoryDao = new CategoryDao
 
   /**
    * Get paged article feed for the given user
@@ -58,6 +60,7 @@ class Endpoint extends Logging {
       feedService.action(action, articleLink, user.getEmail)
     } else {
       Array(new Badge("Stará bačkora", "Přečetl jsi recenze 10 černobílých filmů", "http://www.nadmerneboty.cz/fotky4936/fotos/_vyr_266BP0773.jpg"))
+    }
   }
 
   /**
@@ -66,9 +69,12 @@ class Endpoint extends Logging {
    * @return list of badges or empty list
    */
   @ApiMethod(name = "badges", path = "badges", httpMethod = HttpMethod.GET)
-  def badges(user: User): Array[Badge] = {
-    //TODO
-    Array(new Badge("Stará bačkora", "Přečetl jsi recenze 10 černobílých filmů", "http://www.nadmerneboty.cz/fotky4936/fotos/_vyr_266BP0773.jpg"))
+  def badges(user: User):Array[Badge] = {
+    if (user != null) {
+      categoryDao.find(user.getEmail)
+    } else {
+      Array(new Badge("Stará bačkora", "Přečetl jsi recenze 10 černobílých filmů", "http://www.nadmerneboty.cz/fotky4936/fotos/_vyr_266BP0773.jpg"))
+    }
   }
 
 

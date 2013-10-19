@@ -8,3 +8,7 @@ class Badge(@BeanProperty val title: String,
            ) {
 
 }
+
+object Badge {
+  def apply(title: String) = new Badge(title, null, null)
+}

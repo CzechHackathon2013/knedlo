@@ -1,10 +1,12 @@
 package cz.czechhackathon.knedlo.service
 
-import cz.czechhackathon.knedlo.dao.{FeedDao, UserDao}
+import cz.czechhackathon.knedlo.dao.{CategoryDao, FeedDao, UserDao}
 import cz.czechhackathon.knedlo.model.{Badge, Article}
 
 class FeedService(val userDao: UserDao = new UserDao,
-                  val feedDao: FeedDao = new FeedDao) {
+                  val feedDao: FeedDao = new FeedDao,
+                  val categoryDao: CategoryDao = new CategoryDao
+                   ) {
 
   def save(article: Article) {
     userDao.findAll().foreach(
@@ -23,11 +25,13 @@ class FeedService(val userDao: UserDao = new UserDao,
       case "delete" => -1
       case _ => return Array()
     }
-    val feed = feedDao.update(articleLink, email, status)
-    feed.category
 
-    // todo count badges
-    
-    Array()
+    val feed = feedDao.update(articleLink, email, status)
+    val original = categoryDao.find(email).toList
+
+    categoryDao.update(email, feed.category, status)
+
+    val current = categoryDao.find(email).toList
+    current.diff(original).toArray
   }
 }
