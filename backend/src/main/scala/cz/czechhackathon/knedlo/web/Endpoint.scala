@@ -26,8 +26,6 @@ class Endpoint extends Logging {
       log.info(s"${user.toString} - email: ${user.getEmail}")
     }
 
-    val articles
-
     Array(new Article("foo", "http://foo"))
   }
 
