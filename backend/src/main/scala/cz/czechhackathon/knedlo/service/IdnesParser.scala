@@ -18,6 +18,7 @@ class IdnesParser extends Logging {
     "http://i.idnes.cz/12/042/cl6/STK426ff7_pistole_pancer2.jpg",
     "http://i.idnes.cz/12/061/cl6/JB438d93_profimedia_0115774931.jpg"
   )
+  private val sources = Seq("super.cz", "moviezone.cz", "blog.respekt.cz")
 
   def parse(in: InputStream): Seq[Article] = {
     val root = XML.load(in)
@@ -28,7 +29,8 @@ class IdnesParser extends Logging {
       val text = s"$description\n\n$description\n\n$description\n\n$description\n\n$description\n\n"
       val category = (node \\ "category").text.split('-')(0).trim
       val img = images(Random.nextInt(images.size))
-      new Article(title, link, description, text, "idnes", img, category)
+      val src = sources(Random.nextInt(sources.size))
+      new Article(title, link, description, text, src, img, category)
     })
   }
 

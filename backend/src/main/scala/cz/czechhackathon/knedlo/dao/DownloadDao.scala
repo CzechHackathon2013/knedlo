@@ -4,6 +4,7 @@ import com.google.appengine.api.datastore._
 import cz.czechhackathon.knedlo.model.Article
 import java.util.Date
 import com.github.hexx.gaeds.{Datastore, Key}
+import scala.language.postfixOps
 
 class DownloadDao {
 
