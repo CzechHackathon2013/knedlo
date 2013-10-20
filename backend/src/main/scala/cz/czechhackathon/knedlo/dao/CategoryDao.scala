@@ -2,11 +2,13 @@ package cz.czechhackathon.knedlo.dao
 
 import cz.czechhackathon.knedlo.model.Badge
 
-class CategoryDao {
+class CategoryDao(val articlesToGetABadge:Int = 2) {
 
   def find(email: String): Array[Badge] = {
     Category.query()
-      .filter(c => (c.email #== email) and (c.count #>= 10)).asIterator()
+      .filter(c => {
+      (c.email #== email) and (c.count #>= articlesToGetABadge)
+    }).asIterator()
       .map(c => Badge(c.category))
       .toArray
   }
