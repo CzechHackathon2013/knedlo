@@ -9,6 +9,7 @@ import javax.annotation.Nullable
 import cz.czechhackathon.knedlo.util.Logging
 import cz.czechhackathon.knedlo.service.FeedService
 import cz.czechhackathon.knedlo.dao.CategoryDao
+import com.google.appengine.api.oauth.OAuthRequestException
 
 @Api(name = "knedlo", version = "v1", clientIds = Array(
   "338711060290.apps.googleusercontent.com", // iOS
@@ -42,7 +43,7 @@ class Endpoint extends Logging {
           "blog.respekt.ihned.cz", null, "blog"))
     } else {
       log.info(s"${user.toString} - email: ${user.getEmail}")
-      feedService.get(user.getEmail)
+      feedService.getFeed(testEmail)
     }
 
   }

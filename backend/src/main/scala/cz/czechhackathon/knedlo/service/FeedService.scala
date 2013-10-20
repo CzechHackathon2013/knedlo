@@ -10,11 +10,11 @@ class FeedService(val userDao: UserDao = new UserDao,
 
   def save(article: Article) {
     userDao.findAll().foreach(
-      feedDao.store(article, _)
+      feedDao.save(article, _)
     )
   }
 
-  def get(userEmail: String): Array[Article] = {
+  def getFeed(userEmail: String): Array[Article] = {
     feedDao.get(userEmail)
   }
 

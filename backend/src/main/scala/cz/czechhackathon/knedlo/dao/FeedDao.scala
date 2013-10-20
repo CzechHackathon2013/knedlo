@@ -14,7 +14,7 @@ class FeedDao {
    * @param article article to be stored
    * @param userEmail user email
    */
-  def store(article: Article, userEmail: String) {
+  def save(article: Article, userEmail: String) {
     Datastore.put(
       new Feed(userEmail, article.title, article.link, Option(new Text(article.description)), Option(article.source),
         Option(article.image), article.category, new Date(), 0))
@@ -48,10 +48,11 @@ class FeedDao {
    * @throws IllegalStateException if no combination of link and user matches
    */
   def update(link: String, email: String, status: Long): Feed = {
-    val feed = Feed.query().filter(f => (f.link #== link) and (f.userEmail #== email)).asSingle()
-    if (feed == null) {
+    val i = Feed.query().filter(f => (f.link #== link) and (f.userEmail #== email)).asIterator()
+    if (!i.hasNext) {
       throw new IllegalStateException(s"No record found for link $link and user $email")
     }
+    val feed = i.next()
     feed.status = status
     feed.put()
     feed

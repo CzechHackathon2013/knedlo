@@ -12,9 +12,10 @@ class CategoryDao {
   }
 
   def update(email: String, category: String, status: Long) {
-    val cat = Category.query()
+    val i = Category.query()
       .filter(c => (c.category #== category) and (c.email #== email))
-      .asSingle()
+      .asIterator()
+    val cat = if (i.hasNext) i.next() else new Category(email, category, 0)
     cat.count = status + cat.count
     cat.put()
   }

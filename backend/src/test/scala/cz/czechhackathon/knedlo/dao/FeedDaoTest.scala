@@ -24,7 +24,7 @@ class FeedDaoTest extends FunSuite with BeforeAndAfter with MockitoSugar with Sh
   }
 
   test("store") {
-    dao.store(article, userId)
+    dao.save(article, userId)
     //TODO
   }
 }
