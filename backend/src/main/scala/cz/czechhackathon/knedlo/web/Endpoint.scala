@@ -41,16 +41,7 @@ class Endpoint extends Logging {
       log.info(s"user is null")
       val testEmail = "test@gmail.com"
       userService.saveIfMissing(new User(testEmail, "testDomain"))
-      feedService.save(new Article("Osmany Laffita se zbláznil do paruk: K jejich nošení ho inspiroval světově známý zpěvák",
-          "http://www.super.cz/215378-osmany-laffita-se-zblaznil-do-paruk-k-jejich-noseni-ho-inspiroval-svetove-znamy-zpevak.html",
-          "Na představení kolekce koberečků do koupelen dorazil její autor Osmany Laffita nezvykle střídmě oblečený. „Chtěl jsem nechat vyniknout moji práci, a tak jsem se trošku upozadil do černé,&quot; nechal se slyšet Osmany.",
-          "super.cz",
-          "http://media.super.cz/images/top_foto1/0000000005370274/GjQvBQBwHLJo7s_QvjAfFQ/52612b8a82e937514dd10000-91569.jpg",
-          "bulvar"))
-      feedService.save(new Article("Komiks: Tisková zpráva Scientologické církve",
-          "http://praks.blog.respekt.ihned.cz/c1-61028760-komiks-tiskova-zprava-scientologicke-cirkve",
-          "Vedle psaní článků jsem se rozhodl malovat pomocí comicscreator.cz komiksy... tento mne napadl při čtení tiskové zprávy Scientologické církve.",
-          "blog.respekt.ihned.cz", null, "blog"))
+      // TODO onboarding (fill user's feed)
       feedService.getFeed(testEmail)
     }
   }

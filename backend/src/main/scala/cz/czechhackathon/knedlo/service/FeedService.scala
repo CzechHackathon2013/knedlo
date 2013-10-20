@@ -1,16 +1,18 @@
 package cz.czechhackathon.knedlo.service
 
-import cz.czechhackathon.knedlo.dao.{CategoryDao, FeedDao, UserDao}
+import cz.czechhackathon.knedlo.dao.{DownloadDao, CategoryDao, FeedDao, UserDao}
 import cz.czechhackathon.knedlo.model.{Badge, Article}
 
 class FeedService(val userDao: UserDao = new UserDao,
                   val feedDao: FeedDao = new FeedDao,
-                  val categoryDao: CategoryDao = new CategoryDao
+                  val categoryDao: CategoryDao = new CategoryDao,
+                  val downloadDao: DownloadDao = new DownloadDao
                    ) {
 
-  def save(article: Article) {
+  def save(articleId: String) {
+    val item = downloadDao.get(articleId)
     userDao.findAll().foreach(
-      feedDao.save(article, _)
+      feedDao.save(item, _)
     )
   }
 
