@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Knedlo</string>
+    
+    <string name="title_read_later">Přečíst později</string>
+    <string name="title_already_read">Přečtené</string>
+    <string name="title_badges">Vaše body a odznaky</string>
+    <string name="text_badges_hint">Za přečtení, sdílení a další práci s každým článkem získáváte body na Váš osobní profil. Za dostatečný počet bodů získáváte odznak. A tohle jsou ty Vaše:</string>
+
+</resources>
