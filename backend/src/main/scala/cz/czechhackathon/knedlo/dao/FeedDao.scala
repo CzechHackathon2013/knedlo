@@ -24,17 +24,17 @@ class FeedDao {
    * @return array of articles
    */
   def get(userEmail: String): Array[Article] = {
-    Feed.query
+    Feed.query()
       .filter(_.userEmail #== userEmail)
       .sort(_.insertDate desc)
       .asIterator().map {
       f =>
         val desc = f.description.__valueOfProperty match {
-          case Some(d) => d.toString
+          case Some(d) => d.getValue
           case None => null
         }
         val text = f.text.__valueOfProperty match {
-          case Some(t) => t.toString
+          case Some(t) => t.getValue
           case None => null
         }
         new Article(f.title, f.link, desc, text, f.source.getOrElse(null), f.image.getOrElse(null), f.category)
