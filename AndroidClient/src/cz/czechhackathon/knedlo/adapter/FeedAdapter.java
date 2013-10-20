@@ -41,6 +41,9 @@ public class FeedAdapter extends ArrayAdapter<FeedItem> {
 				itemHeight = view.getHeight();
 			}
 		});
+		
+		if(items == null | items.isEmpty())
+			return view;
 
 		// new item creation and keeping reference to surrounding view (for future content refresh)
 		FeedItem item = items.get(position);
@@ -65,8 +68,11 @@ public class FeedAdapter extends ArrayAdapter<FeedItem> {
 
 		((TextView)view.findViewById(R.id.feed_item_title)).setText(item.getTitle());
 		
+		// TODO: remove for final
+		/*
 		if(item.getImageUrl() == null)
 			view.findViewById(R.id.feed_item_thumbnail).setVisibility(View.GONE);
+		*/
 	}
 
 	/**

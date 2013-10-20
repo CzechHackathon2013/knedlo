@@ -1,9 +1,11 @@
 package cz.czechhackathon.knedlo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +19,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
+import com.appspot.knedloreader.knedlo.Knedlo;
+import com.appspot.knedloreader.knedlo.model.Article;
 import com.example.android.swipedismiss.SwipeDismissListViewTouchListener;
 
 import cz.czechhackathon.knedlo.adapter.FeedAdapter;
@@ -47,6 +51,8 @@ public class FeedFragment extends Fragment implements OnItemClickListener {
 
 	private int iconSize = 64;          // predefined value TODO: update at the runtime - height of list item (already there)
 	private int layoutWidth;
+	
+	private Knedlo knedloService;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,22 +65,51 @@ public class FeedFragment extends Fragment implements OnItemClickListener {
 		return view;
 	}
 
+	/**
+	 * Asynchronous task for getting list of articles
+	 *
+	 */
+	private class QueryArticlesTask extends AsyncTask<Void, Void, List<Article>> {
+		protected List<Article> doInBackground(Void... params) {
+			List<Article> articleList = null;
+			
+			try {
+				articleList = knedloService.feed().execute().getItems();
+			} catch (IOException e) {
+			}
+			return articleList;
+		}
+
+		protected void onPostExecute(List<Article> articleList) {
+			if(articleList == null || articleList.isEmpty())
+				return;
+			
+			feedAdapter.clear();
+			
+			for(Article article : articleList) {
+				FeedItem item = new FeedItem();
+				
+				item.setTitle(article.getTitle());
+				item.setPerex(article.getDescription());
+				item.setImageUrl(article.getImage());
+				
+				feedAdapter.insert(item, feedAdapter.getCount());
+			}
+			
+			feedAdapter.notifyDataSetChanged();
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
 
-		// mock
-		List<FeedItem> items = new ArrayList<FeedItem>();
-		for (int i = 0; i < 20; i++) {
-			FeedItem item = new FeedItem();
-			item.setTitle("Item " + (i + 1));
-			if(i%2 == 1)
-				item.setImageUrl("a");
-			items.add(item);
-		}
-
-		feedAdapter = new FeedAdapter(getActivity(), items);
+		// initialization of feedAdapter - empty set after start
+		feedAdapter = new FeedAdapter(getActivity(), new ArrayList<FeedItem>());
 		lvFeed.setAdapter(feedAdapter);
+		
+		// fetching articles on background
+		new QueryArticlesTask().execute();
 
 		setupSwipeActionIcons();
 		
@@ -210,6 +245,14 @@ public class FeedFragment extends Fragment implements OnItemClickListener {
 		Intent intent = new Intent(getActivity().getBaseContext(), DetailActivity.class);
 		intent.putExtra(DetailActivity.EXTRA_TITLE, item.getTitle());
 		startActivity(intent);
+	}
+
+	/**
+	 * setter for knedlo service
+	 * @param knedloService
+	 */
+	public void setKnedloService(Knedlo knedloService) {
+		this.knedloService = knedloService;
 	}
 
 }

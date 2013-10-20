@@ -57,7 +57,8 @@ public class Knedlo extends com.google.api.client.googleapis.services.json.Abstr
    *
    * @since 1.7
    */
-  public static final String DEFAULT_ROOT_URL = "https://knedloreader.appspot.com/_ah/api/";
+  //public static final String DEFAULT_ROOT_URL = "https://knedloreader.appspot.com/_ah/api/";
+  public static final String DEFAULT_ROOT_URL = "http://192.168.218.98:8888/_ah/api/";
 
   /**
    * The default encoded service path of the service. This is determined when the library is

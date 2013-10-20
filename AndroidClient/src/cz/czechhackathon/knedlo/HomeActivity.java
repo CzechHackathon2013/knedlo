@@ -8,6 +8,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.View;
 
+import com.appspot.knedloreader.knedlo.Knedlo;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.json.gson.GsonFactory;
 import com.nikola.despotoski.drawerlayoutedgetoggle.DrawerLayoutEdgeToggle;
 
 /**
@@ -21,13 +24,20 @@ public class HomeActivity extends FragmentActivity {
 	private TopicDrawerFragment topicDrawerFragment;
 	private DrawerLayout drawerLayout;
 
+	private Knedlo knedloService;	// FukkenGogolEndpoint service
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_home);
+		
+		// service creation
+		Knedlo.Builder builder = new Knedlo.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+		knedloService = builder.build();
 
 		feedFragment = new FeedFragment();
+		feedFragment.setKnedloService(knedloService);
 
 		setupTopicDrawer();
 	}
