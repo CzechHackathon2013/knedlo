@@ -13,8 +13,10 @@ import com.google.appengine.api.oauth.OAuthRequestException
 
 @Api(name = "knedlo", version = "v1", clientIds = Array(
   "338711060290.apps.googleusercontent.com", // iOS
-  "338711060290-5hmko3leeamlt9us7vcpdg7l2a5q163n.apps.googleusercontent.com" // Android
-))
+  "338711060290-5hmko3leeamlt9us7vcpdg7l2a5q163n.apps.googleusercontent.com", // Android
+  "338711060290-ihdh6ls1fbut48l5nt2aahonnkgokd1c.apps.googleusercontent.com"), // Web (OAuth)
+  audiences = Array("338711060290-ihdh6ls1fbut48l5nt2aahonnkgokd1c.apps.googleusercontent.com")
+)
 class Endpoint extends Logging {
 
   val feedService = new FeedService
@@ -29,6 +31,7 @@ class Endpoint extends Logging {
   @ApiMethod(name = "feed", path = "feed", httpMethod = HttpMethod.GET)
   def feed(@Named("page") @Nullable page: Integer, user: User): Array[Article] = {
     if (user == null) {
+      //TODO throw new OAuthRequestException("Unauthorized")
       log.info(s"user is null")
       Array(
         new Article("Osmany Laffita se zbláznil do paruk: K jejich nošení ho inspiroval světově známý zpěvák",
@@ -60,6 +63,7 @@ class Endpoint extends Logging {
     if (user != null) {
       feedService.action(action, articleLink, user.getEmail)
     } else {
+      //TODO throw new OAuthRequestException("Unauthorized")
       Array(new Badge("Stará bačkora", "Přečetl jsi recenze 10 černobílých filmů", "http://www.nadmerneboty.cz/fotky4936/fotos/_vyr_266BP0773.jpg"))
     }
   }
@@ -70,13 +74,11 @@ class Endpoint extends Logging {
    * @return list of badges or empty list
    */
   @ApiMethod(name = "badges", path = "badges", httpMethod = HttpMethod.GET)
-  def badges(user: User):Array[Badge] = {
+  def badges(user: User): Array[Badge] = {
     if (user != null) {
       categoryDao.find(user.getEmail)
     } else {
-      Array(new Badge("Stará bačkora", "Přečetl jsi recenze 10 černobílých filmů", "http://www.nadmerneboty.cz/fotky4936/fotos/_vyr_266BP0773.jpg"))
+      throw new OAuthRequestException("Unauthorized")
     }
   }
-
-
 }
