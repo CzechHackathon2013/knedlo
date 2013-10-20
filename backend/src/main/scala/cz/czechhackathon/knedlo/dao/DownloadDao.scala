@@ -18,7 +18,8 @@ class DownloadDao {
     }
 
     val desc = if (article.description != null) Some(new Text(article.description)) else None
-    val item = new DownloadItem(article.title, article.link, desc, Option(article.source),
+    val text = if (article.text != null) Some(new Text(article.text)) else None
+    val item = new DownloadItem(article.title, article.link, desc, text, Option(article.source),
       Option(article.image), article.category, new Date)
     item.key = Option(key)
     //println(s"saving ${key.toWebSafeString}")

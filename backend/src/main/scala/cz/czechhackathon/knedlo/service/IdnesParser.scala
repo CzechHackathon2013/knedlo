@@ -16,8 +16,9 @@ class IdnesParser extends Logging {
       val title = (node \\ "title").text
       val link = (node \\ "link").text.trim
       val description = (node \\ "description").text.split("<")(0)
+      val text = s"$description\n\n$description\n\n$description\n\n$description\n\n$description\n\n"
       val category = (node \\ "category").text.split('-')(0).trim
-      new Article(title, link, description, "idnes", null, category)
+      new Article(title, link, description, text, "idnes", null, category)
     })
   }
 

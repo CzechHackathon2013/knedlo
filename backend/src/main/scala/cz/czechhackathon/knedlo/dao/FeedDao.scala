@@ -14,8 +14,8 @@ class FeedDao {
    */
   def save(item: DownloadItem, userEmail: String) {
     Datastore.put(
-      new Feed(userEmail, item.title, item.link, item.description, item.source,
-        item.image, item.category, item.insertDate, 0))
+      new Feed(userEmail, item.title, item.link, item.description, item.text, item.source, item.image, item.category,
+        item.insertDate, 0))
   }
 
   /**
@@ -33,7 +33,11 @@ class FeedDao {
           case Some(d) => d.toString
           case None => null
         }
-        new Article(f.title, f.link, desc, f.source.getOrElse(null), f.image.getOrElse(null), f.category)
+        val text = f.text.__valueOfProperty match {
+          case Some(t) => t.toString
+          case None => null
+        }
+        new Article(f.title, f.link, desc, text, f.source.getOrElse(null), f.image.getOrElse(null), f.category)
     }.toArray
   }
 

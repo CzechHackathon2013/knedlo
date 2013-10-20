@@ -15,6 +15,7 @@ generate iOS client: `ServiceGenerator knedlo-v1-rpc.discovery --outputDir iOS`
 Run
 -------
 `dev_appserver.sh --port=8888 target/webapp`
+on public interface: `dev_appserver.sh --address="0.0.0.0" --port=8888 target/webapp`
 
 Deploy
 -------
