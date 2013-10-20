@@ -5,6 +5,7 @@ import scala.beans.BeanProperty
 class Article(@BeanProperty val title: String,
               @BeanProperty val link: String,
               @BeanProperty val description: String = null,
+              @BeanProperty val text: String = null,
               @BeanProperty val source: String = null,
               @BeanProperty val image: String = null,
               @BeanProperty val category: String

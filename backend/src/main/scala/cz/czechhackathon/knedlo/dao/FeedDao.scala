@@ -1,23 +1,21 @@
 package cz.czechhackathon.knedlo.dao
 
 import cz.czechhackathon.knedlo.model.Article
-import java.util.Date
 import com.github.hexx.gaeds.Datastore
 import com.github.hexx.gaeds.Property._
-import com.google.appengine.api.datastore.Text
 import scala.language.postfixOps
 
 class FeedDao {
 
   /**
    * Store article to feed of given user.
-   * @param article article to be stored
+   * @param item article to be stored
    * @param userEmail user email
    */
-  def save(article: Article, userEmail: String) {
+  def save(item: DownloadItem, userEmail: String) {
     Datastore.put(
-      new Feed(userEmail, article.title, article.link, Option(new Text(article.description)), Option(article.source),
-        Option(article.image), article.category, new Date(), 0))
+      new Feed(userEmail, item.title, item.link, item.description, item.text, item.source, item.image, item.category,
+        item.insertDate, 0))
   }
 
   /**
@@ -26,16 +24,20 @@ class FeedDao {
    * @return array of articles
    */
   def get(userEmail: String): Array[Article] = {
-    Feed.query
+    Feed.query()
       .filter(_.userEmail #== userEmail)
       .sort(_.insertDate desc)
       .asIterator().map {
       f =>
         val desc = f.description.__valueOfProperty match {
-          case Some(d) => d.toString
+          case Some(d) => d.getValue
           case None => null
         }
-        new Article(f.title, f.link, desc, f.source.getOrElse(null), f.image.getOrElse(null), f.category)
+        val text = f.text.__valueOfProperty match {
+          case Some(t) => t.getValue
+          case None => null
+        }
+        new Article(f.title, f.link, desc, text, f.source.getOrElse(null), f.image.getOrElse(null), f.category)
     }.toArray
   }
 

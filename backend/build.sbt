@@ -13,6 +13,7 @@ libraryDependencies ++= Seq (
   "com.github.hexx" % "gaeds_2.10" % "0.2.0",
   "com.google.appengine" % "appengine-api-1.0-sdk" % "1.8.6",
   "com.google.appengine" % "appengine-endpoints" % "1.8.6",
+  "commons-lang" % "commons-lang" % "2.6",
   "javax.servlet" % "servlet-api" % "2.5" % "provided",
   "javax.inject" % "javax.inject" % "1", // todo needed?
   "org.scalatest" % "scalatest_2.10" % "1.9.1" % "test",
