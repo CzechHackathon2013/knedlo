@@ -23,6 +23,12 @@ class IdnesParser extends Logging {
 
   def download: Seq[Article] = {
     log.info(s"Downloading ${getClass.getSimpleName} from $url")
-    parse(url.openStream())
+    try {
+      parse(url.openStream())
+    }
+    catch {
+      case e: Exception => log.warning(s"Exception fetching $url")
+      Seq()
+    }
   }
 }
