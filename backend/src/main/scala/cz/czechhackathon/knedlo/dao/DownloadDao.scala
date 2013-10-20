@@ -8,7 +8,7 @@ import com.github.hexx.gaeds.{Datastore, Key}
 class DownloadDao {
 
   def save(article: Article): String = {
-    val key = Key[DownloadItem](KeyFactory.createKey("article", article.link))
+    val key = Key[DownloadItem](KeyFactory.createKey(DownloadItem.kind, article.link))
     try {
       get(key.toWebSafeString)
       return key.toWebSafeString
@@ -29,5 +29,12 @@ class DownloadDao {
   def get(key: String): DownloadItem = {
     //println(s"geting $key")
     DownloadItem.get(DownloadItem.stringToKey(key))
+  }
+
+  def find(): Iterator[DownloadItem] = {
+    DownloadItem.query()
+      .sort(_.insertDate desc)
+      .limit(20)
+      .asIterator()
   }
 }

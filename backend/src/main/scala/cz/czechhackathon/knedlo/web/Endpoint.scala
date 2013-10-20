@@ -35,8 +35,9 @@ class Endpoint extends Logging {
     //TODO throw new OAuthRequestException("Unauthorized")
     val user = if (u != null) u else dummy
     log.info(s"${user.toString} - email: ${user.getEmail}")
-    userService.saveIfMissing(user) // TODO tady? a kdy a jak mu pridat clanky?
-    // TODO onboarding (fill user's feed)
+    if (userService.saveIfMissing(user)) {
+      feedService.onboard(user.getEmail)
+    }
     feedService.getFeed(user.getEmail)
   }
 
