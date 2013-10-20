@@ -1,5 +1,9 @@
 package cz.czechhackathon.knedlo;
 
+import com.appspot.knedloreader.knedlo.Knedlo;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.json.gson.GsonFactory;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -19,11 +23,17 @@ public class SectionActivity extends FragmentActivity {
 	private FeedFragment feedFragment;
 	private SectionIdentificator sectionIdentificator;
 	
+	private Knedlo knedloService;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_section);
+		
+		// service creation
+		Knedlo.Builder builder = new Knedlo.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), null);
+		knedloService = builder.build();
 		
 		Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
@@ -47,6 +57,7 @@ public class SectionActivity extends FragmentActivity {
         }
 
 		feedFragment = new FeedFragment();
+		feedFragment.setKnedloService(knedloService);
 	}
 
 	@Override
