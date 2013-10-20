@@ -32,16 +32,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int drawer_shadow=0x7f020007;
         public static final int folder=0x7f020008;
         public static final int ic_launcher=0x7f020009;
-        public static final int icon_knedlo=0x7f02000a;
-        public static final int logo=0x7f02000b;
-        public static final int mz_andr=0x7f02000c;
-        public static final int mz_circle=0x7f02000d;
-        public static final int respekt_circle=0x7f02000e;
-        public static final int respekt_nadr=0x7f02000f;
-        public static final int show_original=0x7f020010;
-        public static final int star=0x7f020011;
-        public static final int super_andr=0x7f020012;
-        public static final int super_circle=0x7f020013;
+        public static final int logo=0x7f02000a;
+        public static final int mz_andr=0x7f02000b;
+        public static final int mz_circle=0x7f02000c;
+        public static final int respekt_circle=0x7f02000d;
+        public static final int respekt_nadr=0x7f02000e;
+        public static final int show_original=0x7f02000f;
+        public static final int star=0x7f020010;
+        public static final int super_andr=0x7f020011;
+        public static final int super_circle=0x7f020012;
     }
     public static final class id {
         public static final int badge_grid=0x7f07000b;
