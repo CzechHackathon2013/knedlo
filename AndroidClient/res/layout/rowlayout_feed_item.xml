@@ -28,8 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textAppearance="?android:attr/textAppearanceSmall"
-			android:textColor="#000000"
-            android:text="Perex nejakej hrozne dlouhej a uplne o nicem, protoze lorem ipsum se mi nechce hledat a ani psat nesmysly a tak podobne. A protoze to je jeste porad kratke, tak tam neco pridam, aby se nereklo." />
+			android:textColor="#000000" />
     </LinearLayout>
 
     <ImageView

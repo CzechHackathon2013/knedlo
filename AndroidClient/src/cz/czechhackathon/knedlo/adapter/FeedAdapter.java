@@ -68,11 +68,10 @@ public class FeedAdapter extends ArrayAdapter<FeedItem> {
 
 		((TextView)view.findViewById(R.id.feed_item_title)).setText(item.getTitle());
 		
-		// TODO: remove for final
-		/*
+		((TextView)view.findViewById(R.id.feed_item_perex)).setText(item.getPerex());
+		
 		if(item.getImageUrl() == null)
 			view.findViewById(R.id.feed_item_thumbnail).setVisibility(View.GONE);
-		*/
 	}
 
 	/**

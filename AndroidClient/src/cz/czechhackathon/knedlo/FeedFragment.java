@@ -74,7 +74,22 @@ public class FeedFragment extends Fragment implements OnItemClickListener {
 		lvFeed.setAdapter(feedAdapter);
 		
 		// fetching articles on background
-		new QueryArticlesTask().execute();
+		// TODO: server fetching temporarily disabled, because of backend is offline
+		//new QueryArticlesTask().execute();
+		
+		// simple mock data filling starts here -------------
+		feedAdapter.clear();
+		for(int i=0; i< 20; i++) {
+			FeedItem item = new FeedItem();
+			item.setTitle("Simple title " + i);
+			item.setPerex("Some perex text for item no. " + i);
+			item.setText("Article content - it should be very very long :D");
+			if(i%2 == 1)
+				item.setImageUrl("foo");
+			feedAdapter.add(item);
+		}
+		feedAdapter.notifyDataSetChanged();
+		// simple mock data endss here -------------
 
 		setupSwipeActionIcons();
 		
