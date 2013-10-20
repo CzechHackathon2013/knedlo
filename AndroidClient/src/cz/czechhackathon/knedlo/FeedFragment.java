@@ -65,41 +65,6 @@ public class FeedFragment extends Fragment implements OnItemClickListener {
 		return view;
 	}
 
-	/**
-	 * Asynchronous task for getting list of articles
-	 *
-	 */
-	private class QueryArticlesTask extends AsyncTask<Void, Void, List<Article>> {
-		protected List<Article> doInBackground(Void... params) {
-			List<Article> articleList = null;
-			
-			try {
-				articleList = knedloService.feed().execute().getItems();
-			} catch (IOException e) {
-			}
-			return articleList;
-		}
-
-		protected void onPostExecute(List<Article> articleList) {
-			if(articleList == null || articleList.isEmpty())
-				return;
-			
-			feedAdapter.clear();
-			
-			for(Article article : articleList) {
-				FeedItem item = new FeedItem();
-				
-				item.setTitle(article.getTitle());
-				item.setPerex(article.getDescription());
-				item.setImageUrl(article.getImage());
-				
-				feedAdapter.insert(item, feedAdapter.getCount());
-			}
-			
-			feedAdapter.notifyDataSetChanged();
-		}
-	}
-
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -243,7 +208,7 @@ public class FeedFragment extends Fragment implements OnItemClickListener {
 
 		// starts new activity for display article content
 		Intent intent = new Intent(getActivity().getBaseContext(), DetailActivity.class);
-		intent.putExtra(DetailActivity.EXTRA_TITLE, item.getTitle());
+		intent.putExtra(DetailActivity.EXTRA_ITEM, item);
 		startActivity(intent);
 	}
 
@@ -255,4 +220,39 @@ public class FeedFragment extends Fragment implements OnItemClickListener {
 		this.knedloService = knedloService;
 	}
 
+	/**
+	 * Asynchronous task for getting list of articles
+	 *
+	 */
+	private class QueryArticlesTask extends AsyncTask<Void, Void, List<Article>> {
+		protected List<Article> doInBackground(Void... params) {
+			List<Article> articleList = null;
+			
+			try {
+				articleList = knedloService.feed().execute().getItems();
+			} catch (IOException e) {
+			}
+			return articleList;
+		}
+
+		protected void onPostExecute(List<Article> articleList) {
+			if(articleList == null || articleList.isEmpty())
+				return;
+			
+			feedAdapter.clear();
+			
+			for(Article article : articleList) {
+				FeedItem item = new FeedItem();
+				
+				item.setTitle(article.getTitle());
+				item.setPerex(article.getDescription());
+				item.setImageUrl(article.getImage());
+				item.setText(article.getText());
+				
+				feedAdapter.insert(item, feedAdapter.getCount());
+			}
+			
+			feedAdapter.notifyDataSetChanged();
+		}
+	}
 }

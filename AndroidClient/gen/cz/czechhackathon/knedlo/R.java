@@ -43,23 +43,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int super_circle=0x7f020012;
     }
     public static final class id {
-        public static final int badge_grid=0x7f07000b;
-        public static final int bonus_drawer_frame=0x7f070002;
+        public static final int badge_grid=0x7f07000c;
         public static final int bonus_drawer_layout=0x7f070000;
-        public static final int button_section_movie_zone=0x7f070008;
-        public static final int button_section_respekt=0x7f07000a;
-        public static final int button_section_super=0x7f070009;
-        public static final int content_frame=0x7f070004;
-        public static final int feed_item_perex=0x7f07000f;
-        public static final int feed_item_thumbnail=0x7f070010;
-        public static final int feed_item_title=0x7f07000e;
-        public static final int feed_list=0x7f07000d;
-        public static final int root_layout=0x7f07000c;
-        public static final int section_content_frame=0x7f070007;
-        public static final int section_image=0x7f070006;
-        public static final int textView1=0x7f070001;
-        public static final int topic_drawer_frame=0x7f070005;
-        public static final int topic_drawer_layout=0x7f070003;
+        public static final int button_section_movie_zone=0x7f070009;
+        public static final int button_section_respekt=0x7f07000b;
+        public static final int button_section_super=0x7f07000a;
+        public static final int content_frame=0x7f070005;
+        public static final int feed_item_perex=0x7f070010;
+        public static final int feed_item_thumbnail=0x7f070011;
+        public static final int feed_item_title=0x7f07000f;
+        public static final int feed_list=0x7f07000e;
+        public static final int perex=0x7f070002;
+        public static final int root_layout=0x7f07000d;
+        public static final int section_content_frame=0x7f070008;
+        public static final int section_image=0x7f070007;
+        public static final int text=0x7f070003;
+        public static final int title=0x7f070001;
+        public static final int topic_drawer_frame=0x7f070006;
+        public static final int topic_drawer_layout=0x7f070004;
     }
     public static final class layout {
         public static final int activity_detail=0x7f030000;

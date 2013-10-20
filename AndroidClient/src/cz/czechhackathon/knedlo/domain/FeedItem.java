@@ -1,5 +1,7 @@
 package cz.czechhackathon.knedlo.domain;
 
+import java.io.Serializable;
+
 import android.view.View;
 
 /**
@@ -7,11 +9,14 @@ import android.view.View;
  * @author shmoula
  *
  */
-public class FeedItem {
-	private View boundView;
+public class FeedItem implements Serializable {
+	private static final long serialVersionUID = -476311587722546742L;
+
+	transient private View boundView;
 	
 	private String title;
 	private String perex;
+	private String text;
 	private String imageUrl;
 	
 	public String getTitle() {
@@ -25,6 +30,12 @@ public class FeedItem {
 	}
 	public void setPerex(String perex) {
 		this.perex = perex;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
 	}
 	public String getImageUrl() {
 		return imageUrl;
