@@ -4,12 +4,12 @@ import scala.xml._
 import java.io.InputStream
 import cz.czechhackathon.knedlo.model.Article
 import java.net.URL
-import cz.czechhackathon.knedlo.util.Logging
 import scala.util.Random
 
-class IdnesParser extends Logging {
+class IdnesParser extends Parser {
 
-  private val url = new URL("http://servis.idnes.cz/rss.aspx")
+  override val url = new URL("http://servis.idnes.cz/rss.aspx")
+
   private val images = Seq(
     "http://media.novinky.cz/366/393668-gallery1-bp4jl.jpg",
     "http://media.novinky.cz/761/397612-original1-8pc4q.jpg",
@@ -34,14 +34,4 @@ class IdnesParser extends Logging {
     })
   }
 
-  def download: Seq[Article] = {
-    log.info(s"Downloading ${getClass.getSimpleName} from $url")
-    try {
-      parse(url.openStream())
-    }
-    catch {
-      case e: Exception => log.warning(s"Exception fetching $url")
-      Seq()
-    }
-  }
 }

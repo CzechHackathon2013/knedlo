@@ -6,7 +6,7 @@ import com.google.appengine.api.taskqueue.TaskOptions.Method
 import cz.czechhackathon.knedlo.dao.DownloadDao
 
 class Downloader(val queue: Queue = QueueFactory.getQueue("articles"),
-                 val parsers: Seq[IdnesParser] = Seq(new IdnesParser),
+                 val parsers: Seq[Parser] = Seq(new IdnesParser),
                  val dao: DownloadDao = new DownloadDao
                   ) {
 
